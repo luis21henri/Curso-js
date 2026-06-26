@@ -21,7 +21,8 @@ const helmet = require('helmet')
 const csrf = require('csurf')
 const {middlewareGlobal, checkCsurfError, csrfMiddleware} = require('./src/middlewares/middleware')
 
-const port = 3000;
+// CONFIGURAÇÃO CORRETA DA PORTA PARA O RENDER
+const port = process.env.PORT || 3000;
 
 app.use(helmet())
 app.use(express.urlencoded(
@@ -58,8 +59,8 @@ app.use(csrfMiddleware)
 app.use(routes);
 
 app.on('pronto', () => {
-  app.listen(3000, () => {
-    console.log('http://localhost:3000');
-    console.log('Servidor executando na porta 3000');
+  // Agora usando a variável dinâmica ajustada para servidores na nuvem
+  app.listen(port, () => {
+    console.log(`Servidor executando na porta ${port}`);
   }); 
 });

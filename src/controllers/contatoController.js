@@ -8,7 +8,6 @@ exports.index = (req, res) => {
 
 exports.register = async(req, res) => {
   try {
-    // CORREÇÃO: Vincula o contato ao usuário logado na sessão antes de salvar
     req.body.id_usuario = req.session.user._id;
 
     const contato = new Contato(req.body);
@@ -42,7 +41,6 @@ exports.edit = async function(req, res) {
   try {
     if(!req.params.id) return res.render('404');
     
-    // CORREÇÃO: Garante o vínculo do ID do usuário também durante a edição
     req.body.id_usuario = req.session.user._id;
 
     const contato = new Contato(req.body);
@@ -63,7 +61,8 @@ exports.edit = async function(req, res) {
   }
 };
 
-exports.delete = async function(req, res) {
+// CORREÇÃO: Mudado o nome de 'delete' para 'deleteContato' para evitar conflito de palavra reservada
+exports.deleteContato = async function(req, res) {
   if(!req.params.id) return res.render('404');
 
   const contato = await Contato.delete(req.params.id);

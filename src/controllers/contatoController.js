@@ -61,7 +61,7 @@ exports.edit = async function(req, res) {
   }
 };
 
-// CORREÇÃO: Mudado o nome de 'delete' para 'deleteContato' para evitar conflito de palavra reservada
+
 exports.deleteContato = async function(req, res) {
   if(!req.params.id) return res.render('404');
 
